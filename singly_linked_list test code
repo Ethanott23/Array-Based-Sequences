@@ -1,0 +1,51 @@
+from singly_linked_list import SinglyLinkedList
+
+print("===== BUILD FORWARD LIST =====")
+lst = SinglyLinkedList()
+lst.build_forward_list([10, 20, 30, 40, 50])
+lst.display()
+
+print("\nDelete first:")
+lst.remove(10)
+lst.display()
+
+print("Delete last:")
+lst.remove(50)
+lst.display()
+
+print("Delete interior (30):")
+lst.remove(30)
+lst.display()
+
+
+print("\n===== BUILD BACKWARD LIST =====")
+lst2 = SinglyLinkedList()
+lst2.build_backward_list([10, 20, 30, 40, 50])
+lst2.display()
+
+print("\nDelete first:")
+lst2.remove(50)   # first in backward list
+lst2.display()
+
+print("Delete last:")
+lst2.remove(10)   # last in backward list
+lst2.display()
+
+print("Delete interior (30):")
+lst2.remove(30)
+lst2.display()
+
+
+print("\n===== TEST remove_all() =====")
+lst3 = SinglyLinkedList()
+lst3.build_forward_list([5, 7, 5, 9, 5, 11])
+lst3.display()
+lst3.remove_all(5)
+lst3.display()
+
+print("\n===== TEST display_reverse_nr() =====")
+lst4 = SinglyLinkedList()
+lst4.build_forward_list([1, 2, 3, 4, 5])
+lst4.display()
+print("Reverse (non-recursive):")
+lst4.display_reverse_nr()

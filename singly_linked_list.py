@@ -32,7 +32,6 @@ class SinglyLinkedList:
             self.__tail.next = new_node
             self.__tail = new_node
         self.__count += 1
- 
 
     def __prepend(self, value):
         new_node = Node(value)
@@ -41,7 +40,6 @@ class SinglyLinkedList:
         if self.__tail is None:
             self.__tail = new_node
         self.__count += 1
- 
 
     def insert_after(self, after_value, new_value):
         if self.__head is None:
@@ -54,17 +52,14 @@ class SinglyLinkedList:
         if current is None:
             raise SinglyLinkedList.NodeNotFoundException()
 
-        new_node = Node(new_value)     
-        new_node.next = current.next   
-        current.next = new_node         
+        new_node = Node(new_value)
+        new_node.next = current.next
+        current.next = new_node
 
-        if current == self.__tail:  #if inserted at end of list
-            self.__tail = new_node  #re-route the tail pointer
+        if current == self.__tail:
+            self.__tail = new_node
 
         self.__count += 1
- 
- 
-
 
     def remove(self, value):
         if self.__head is None:
@@ -81,20 +76,40 @@ class SinglyLinkedList:
             raise SinglyLinkedList.NodeNotFoundException()
 
         if previous is None:
-            self.__head = current.next  #remove first node
+            self.__head = current.next
         else:
-            previous.next = current.next #remove an interior node
+            previous.next = current.next
 
         if current == self.__tail:
-            self.__tail = previous #remove the last node
+            self.__tail = previous
 
         self.__count -= 1
 
- 
+    # ✅ NEW FUNCTION 1
+    def remove_all(self, value):
+        # Remove matching nodes from the front
+        while self.__head and self.__head.data == value:
+            self.__head = self.__head.next
+            self.__count -= 1
 
-     
- 
-def display(self):
+        # If list is now empty
+        if self.__head is None:
+            self.__tail = None
+            return
+
+        # Remove interior/last matches
+        current = self.__head
+        while current.next:
+            if current.next.data == value:
+                current.next = current.next.next
+                self.__count -= 1
+            else:
+                current = current.next
+
+        # Update tail pointer
+        self.__tail = current
+
+    def display(self):
         current = self.__head
         elements = []
         while current:
@@ -106,6 +121,18 @@ def display(self):
         def _reverse_recursive(node):
             return _reverse_recursive(node.next) + [node.data] if node else []
         print(" <- ".join(map(str, _reverse_recursive(self.__head))))
+
+    # ✅ NEW FUNCTION 2 (NON-RECURSIVE)
+    def display_reverse_nr(self):
+        stack = []
+        current = self.__head
+        while current:
+            stack.append(current.data)
+            current = current.next
+
+        while stack:
+            print(stack.pop(), end=" ")
+        print()
 
     def __iter__(self):
         current = self.__head

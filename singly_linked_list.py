@@ -85,7 +85,7 @@ class SinglyLinkedList:
 
         self.__count -= 1
 
-    # ✅ NEW FUNCTION 1
+    
     def remove_all(self, value):
         # Remove matching nodes from the front
         while self.__head and self.__head.data == value:
@@ -122,7 +122,7 @@ class SinglyLinkedList:
             return _reverse_recursive(node.next) + [node.data] if node else []
         print(" <- ".join(map(str, _reverse_recursive(self.__head))))
 
-    # ✅ NEW FUNCTION 2 (NON-RECURSIVE)
+    
     def display_reverse_nr(self):
         stack = []
         current = self.__head
